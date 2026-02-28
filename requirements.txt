@@ -1,0 +1,2 @@
+cryptography==38.0.4
+art==5.7
