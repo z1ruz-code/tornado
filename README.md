@@ -1,17 +1,17 @@
-## Установка и запуск
+## Installation and Run
 
-1. **Клонируйте репозиторий**
+1. **Clone the repository**
 ```bash
 git clone https://github.com/z1ruz-code/tornado.git
 cd tornado
 ```
-2. **Установите зависимости**
+2. **Install dependencies**
 
-    Убедитесь, что у вас установлен [Python 3.6](https://www.python.org/) или выше, затем выполните:
+Make sure you have [Python 3.6](https://www.python.org/) or higher installed, then run:
 ```bash
 pip install -r requirements.txt
 ```
-3. **Запустите программу**
+3. **Run the program**
 ```bash
 python tornado.py
 ```
