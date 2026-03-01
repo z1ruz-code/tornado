@@ -12,6 +12,8 @@
 git clone https://github.com/z1ruz-code/tornado.git
 cd tornado
 ```
+or download from this [**page**](https://github.com/z1ruz-code/tornado/releases/tag/v1.2.0)
+
 2. **Install dependencies**
 
 Make sure you have [Python 3.6](https://www.python.org/) or higher installed, then run:
