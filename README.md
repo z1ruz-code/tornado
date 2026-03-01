@@ -26,6 +26,3 @@ When you encrypt text, you receive a key (it's best to save it in a secure place
 ## Language of tool
 
 Using the `translations.json` file, you can add any language to the tool.
-
-You can use the [languages-for-tornado](https://github.com/z1ruz-code/languages-for-tornado) repository to add more languages ​​via `translations.json`.
-
