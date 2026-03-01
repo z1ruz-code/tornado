@@ -1,3 +1,8 @@
+![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![GitHub release](https://img.shields.io/github/v/release/z1ruz-code/tornado)
+![Platform](https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey)
+
 # 🌪️ tornado
 
 ## Installation and Run
