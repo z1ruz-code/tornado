@@ -2,8 +2,18 @@ import sys
 import time
 import json
 import os
+import subprocess
+import io
+import webbrowser
 from cryptography.fernet import Fernet
 import art
+import CheckingForUpdates
+from packaging.version import Version
+
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+    subprocess.run('chcp 65001', shell=True, capture_output=True)
 
 class TornadoApp:
     def __init__(self):
@@ -11,7 +21,7 @@ class TornadoApp:
         self.translations_file = os.path.join('configuration', 'translations.json')
         self.load_config()
         self.load_translations()
-        self.show_banner()
+        self.check_for_updates()
         self.main_menu()
 
     def clear_screen(self):
@@ -39,14 +49,16 @@ class TornadoApp:
             with open(self.config_file, 'r', encoding='utf-8') as f:
                 config = json.load(f)
                 self.lang = config.get('language', 'ru')
+                self.version = config.get('version', '1.2.0')
         except FileNotFoundError:
             self.lang = 'ru'
+            self.version = '1.2.0'
             self.save_config()
 
     def save_config(self):
         os.makedirs('configuration', exist_ok=True)
         with open(self.config_file, 'w', encoding='utf-8') as f:
-            json.dump({'language': self.lang}, f, ensure_ascii=False, indent=4)
+            json.dump({'language': self.lang, 'version': self.version}, f, ensure_ascii=False, indent=4)
 
     def load_translations(self):
         try:
@@ -67,16 +79,31 @@ class TornadoApp:
             return self.translations['ru'][key]
         return key
 
+    def check_for_updates(self):
+        latest = CheckingForUpdates.get_latest_release()
+        if latest:
+            try:
+                if Version(latest) > Version(self.version):
+                    self.clear_screen()
+                    msg = f"Доступна новая версия {latest}. Пожалуйста, обновите программу по ссылке:\nhttps://github.com/z1ruz-code/tornado/releases/latest"
+                    print(self.center(msg))
+                    webbrowser.open("https://github.com/z1ruz-code/tornado/releases/latest")
+                    input(self.center("Нажмите Enter для выхода..."))
+                    sys.exit()
+            except:
+                pass
+
     def show_banner(self):
-        self.clear_screen()
         banner = art.text2art("TORNADO")
         for line in banner.splitlines():
             print(self.center(line))
-        print() 
+        print()
         print(self.center("by z1ruz-code"))
 
     def main_menu(self):
         while True:
+            self.clear_screen()
+            self.show_banner()
             print("\n" + self.center("=" * 30))
             print(self.center(self._('main_menu_title')))
             print(self.center("=" * 30))
@@ -117,7 +144,9 @@ class TornadoApp:
             decrypted_text = f.decrypt(token)
 
             print(f"\n{self.center(self._('decrypt_result'))}")
-            print("\n" + decrypted_text.decode())
+            decrypted_str = decrypted_text.decode()
+            for line in decrypted_str.splitlines():
+                print(self.center(line))
 
         except Exception:
             print(f"\n{self.center(self._('decrypt_error'))}")
@@ -139,9 +168,9 @@ class TornadoApp:
             token = f.encrypt(text)
 
             print(f"\n{self.center(self._('your_key'))}")
-            print("\n" + key.decode())
+            print(self.center(key.decode()))
             print(f"\n{self.center(self._('your_token'))}")
-            print("\n" + token.decode())
+            print(self.center(token.decode()))
         except Exception:
             print(f"\n{self.center(self._('encrypt_error'))}")
         print()
@@ -170,35 +199,39 @@ class TornadoApp:
                 time.sleep(1)
 
     def change_language(self):
-        self.load_translations()
-        self.clear_screen()
-        print("\n" + self.center("=" * 30))
-        print(self.center(self._('choose_language')))
-        print(self.center("=" * 30))
+        while True:
+            self.clear_screen()
+            print("\n" + self.center("=" * 30))
+            print(self.center(self._('choose_language')))
+            print(self.center("=" * 30))
 
-        languages = list(self.translations.keys())
-        for i, lang in enumerate(languages, 1):
-            name = self.translations[lang].get('language_name', lang)
-            print(self.center(f"{i}. {name}"))
-        print(self.center(f"{len(languages)+1}. {self._('back')}"))
+            languages = list(self.translations.keys())
+            for i, lang in enumerate(languages, 1):
+                name = self.translations[lang].get('language_name', lang)
+                print(self.center(f"{i}. {name}"))
+            print(self.center(f"{len(languages)+1}. {self._('back')}"))
 
-        print()
-        choice = self.center_input(self._('choose_action'))
-        try:
-            choice_num = int(choice)
-            if 1 <= choice_num <= len(languages):
-                self.lang = languages[choice_num-1]
-                self.save_config()
-                print(self.center(self._('language_changed')))
-                time.sleep(1)
-            elif choice_num == len(languages)+1:
-                return
-            else:
+            print()
+            choice = self.center_input(self._('choose_action'))
+
+            try:
+                choice_num = int(choice)
+                if 1 <= choice_num <= len(languages):
+                    self.lang = languages[choice_num-1]
+                    self.save_config()
+                    print(self.center(self._('language_changed')))
+                    time.sleep(1)
+                    self.clear_screen()
+                    return
+                elif choice_num == len(languages)+1:
+                    self.clear_screen()
+                    return
+                else:
+                    print(self.center(self._('invalid_language_choice')))
+                    time.sleep(1)
+            except ValueError:
                 print(self.center(self._('invalid_language_choice')))
                 time.sleep(1)
-        except ValueError:
-            print(self.center(self._('invalid_language_choice')))
-            time.sleep(1)
 
 if __name__ == "__main__":
     app = TornadoApp()
