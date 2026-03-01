@@ -1,2 +1,4 @@
-cryptography==38.0.4
-art==5.7
+cryptography==41.0.7
+art==6.1
+requests==2.31.0
+packaging==23.2
