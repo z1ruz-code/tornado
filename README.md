@@ -4,8 +4,6 @@
   <p>
     <img src="https://img.shields.io/badge/python-3.6+-blue.svg" alt="Python version">
     <img src="https://img.shields.io/github/license/z1ruz-code/tornado" alt="License">
-    <img src="https://img.shields.io/badge/platform-windows%20%7C%20linux%20%7C%20macos-lightgrey">
-    <img src="https://img.shields.io/github/v/release/z1ruz-code/tornado">
   </p>
 </div>
 
