@@ -52,6 +52,8 @@ Download the source code from the [release page](https://github.com/z1ruz-code/t
    ```bash
    python tornado.py
    ```
+*  On Windows:
+Simply run the `start.bat` file located in the project folder.
 ## 🛠️ How to Use
 
 1. Upon running `python tornado.py`, the program will start in your terminal.
@@ -87,6 +89,8 @@ To add your own language:
 - `requirements.txt`: Lists the Python dependencies needed for the project.
 
 - `LICENSE`: The license file for the project.
+
+- `start.bat`: A convenient launcher for Windows users (just run this file to start the program).
 
 ## ⭐ Support
 If you find this tool useful, please consider giving it a star on GitHub! Your support is appreciated.
