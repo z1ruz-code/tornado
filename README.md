@@ -47,6 +47,9 @@ Download the source code from the [release page](https://github.com/z1ruz-code/t
    ```bash
    pip install -r requirements.txt
    ```
+* On Windows (double-click):
+Simply run the `install_deps.bat` script located in the `scripts` folder.
+
 3. **Run the Application**
 *  Once the dependencies are installed, you can start Tornado:
    ```bash
@@ -91,6 +94,10 @@ To add your own language:
 - `LICENSE`: The license file for the project.
 
 - `start.bat`: A convenient launcher for Windows users (just run this file to start the program).
+
+- `scripts/`: Contains helper batch scripts for maintenance tasks.
+  * `install_deps.bat`: Installs/updates dependencies.
+  * `clean_cache.bat`: Cleans Python cache files.
 
 ## ⭐ Support
 If you find this tool useful, please consider giving it a star on GitHub! Your support is appreciated.
