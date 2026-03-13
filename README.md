@@ -102,6 +102,12 @@ To add your own language:
 ## ⭐ Support
 If you find this tool useful, please consider giving it a star on GitHub! Your support is appreciated.
 
-## Statistics
+## Star History
 
-[![Star History Chart](https://api.star-history.com/image?repos=z1ruz-code/tornado&type=date&legend=top-left)](https://www.star-history.com/?repos=z1ruz-code%2Ftornado&type=date&legend=top-left)
+<a href="https://www.star-history.com/?repos=z1ruz-code%2Ftornado&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=z1ruz-code/tornado&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=z1ruz-code/tornado&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=z1ruz-code/tornado&type=date&legend=top-left" />
+ </picture>
+</a>
